@@ -27,6 +27,7 @@ public class ClackClient {
     private ClackData dataToSendToServer; // A ClackData object representing the data sent to the server
     private ClackData dataToReceiveFromServer; // A ClackData object representing the data received from the server
     private Scanner inFromStd;
+    private final static String CONSTANT_KEY= "RAMP";
     /**
      * The constructor to set up the username, host name, and port.
      * The connection should be set to be open (closeConnection = false).
