@@ -108,14 +108,14 @@ public class ClackClient {
      */
     public void readClientData() {
             String input= inFromStd.next();
-            if (input == "DONE") {
+            if (input.equals ("DONE")) {
                 this.closeConnection = true;
             }
-            else if(input.substring(0,8) == "SENDFILE"){
+            else if(input.substring(0,8).equals("SENDFILE")){
                 String filename= inFromStd.next();
                 dataToSendToServer= new FileClackData(this.userName,filename, dataToSendToServer.CONSTANT_SENDFILE);
             }
-            else if (input == "LISTUSERS"){
+            else if (input.equals("LISTUSERS")){
                 System.out.println("Unable to perform at this time");
             }
             else {
