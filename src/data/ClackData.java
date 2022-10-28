@@ -162,9 +162,9 @@ public abstract class ClackData {
                 ++ind;
             } else if (alphabet.toUpperCase().contains(s)) {
                 if(alphabet.toUpperCase().indexOf(s) - k < 0){
-                    resultString += alphabet.split("")[26 + (alphabet.toUpperCase().indexOf(s) - k)];
+                    resultString += alphabet.toUpperCase().split("")[26 + (alphabet.toUpperCase().indexOf(s) - k)];
                 } else {
-                    resultString += alphabet.split("")[(alphabet.toUpperCase().indexOf(s) - k) % 26];
+                    resultString += alphabet.toUpperCase().split("")[(alphabet.toUpperCase().indexOf(s) - k) % 26];
                 }
                 ++ind;
             } else {
