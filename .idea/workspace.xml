@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e89d458f-a726-409b-b15c-2c3c7efc0ea7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/data/ClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/ClackData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/FileClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/FileClackData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/MessageClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/MessageClackData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestClackClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestClackData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666985636242</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="first commit">
+      <created>1666987332195</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666987332195</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

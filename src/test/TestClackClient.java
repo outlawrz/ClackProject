@@ -119,5 +119,18 @@ public class TestClackClient {
         System.out.println("clackClient9:\n" + clackClient9);
         System.out.println("clackClient10:\n" + clackClient10);
         System.out.println("clackClient11:\n" + clackClient10);
+
+        clackClient1.start();
+        clackClient2.start();
+        clackClient3.start();
+        clackClient4.start();
+        clackClient5.start();
+        clackClient6.start();
+        clackClient7.start();
+        clackClient8.start();
+        clackClient9.start();
+        clackClient10.start();
+        clackClient11.start();
+
     }
 }

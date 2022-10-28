@@ -107,7 +107,6 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void readClientData() {
-        try {
             String input= inFromStd.next();
             if (input == "DONE") {
                 this.closeConnection = true;
@@ -119,18 +118,11 @@ public class ClackClient {
             else if (input == "LISTUSERS"){
                 System.out.println("Unable to perform at this time");
             }
-            else
-            {
-                while (inFromStd.hasNext()){
-                    input= input + inFromStd.next();
+            else {
+                while (inFromStd.hasNext()) {
+                    input = input + inFromStd.next();
                 }
-                dataToSendToServer = new data.MessageClackData(this.userName,input, dataToSendToServer.CONSTANT_SENDMESSAGE);
-            }
-            }catch(IOException ioe){
-                System.err.println("IO Exception occured");
-            }catch(FileNotFoundException fnfe){
-                dataToSendToServer=null;
-                System.err.println("File could not be found");
+                dataToSendToServer = new data.MessageClackData(this.userName, input, dataToSendToServer.CONSTANT_SENDMESSAGE);
             }
     }
 
