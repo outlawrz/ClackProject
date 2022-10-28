@@ -100,6 +100,7 @@ public class ClackClient {
             dataToReceiveFromServer = dataToSendToServer;
             printData();
         }
+        this.inFromStd.close();
     }
 
     /**
