@@ -113,4 +113,13 @@ public abstract class ClackData {
      * @return data
      */
     public abstract String getData();
+    protected String encrypt(String inputStringtoEncrypt, String key)
+    {
+        return "booty";
+    }
+    protected String decrypt(String inputStringtoDecrypt, String key)
+    {
+        return "cheeks";
+    }
+
 }

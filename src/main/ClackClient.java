@@ -3,7 +3,11 @@ package main;
 import data.ClackData;
 import data.FileClackData;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * The ClackClient class represents the client user. A ClackClient object contains the username,
@@ -22,7 +26,7 @@ public class ClackClient {
     private boolean closeConnection; // A boolean representing whether the connection is closed or not
     private ClackData dataToSendToServer; // A ClackData object representing the data sent to the server
     private ClackData dataToReceiveFromServer; // A ClackData object representing the data received from the server
-
+    private Scanner inFromStd;
     /**
      * The constructor to set up the username, host name, and port.
      * The connection should be set to be open (closeConnection = false).
@@ -39,6 +43,16 @@ public class ClackClient {
         this.closeConnection = false;
         this.dataToSendToServer = null;
         this.dataToReceiveFromServer = null;
+        if(userName==null){
+            throw new IllegalArgumentException("Invalid Argument for user name");
+        }
+        if(hostName==null){
+            throw new IllegalArgumentException("Invalid Argument for host name");
+        }
+        if(port<1024)
+        {
+            throw new IllegalArgumentException("Port number is not large enough");
+        }
     }
 
     /**
@@ -78,6 +92,13 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void start() {
+        InputStreamReader inputStream = new InputStreamReader(System.in);
+        Scanner inFromStd = new Scanner(inputStream);
+        while(!closeConnection) {
+            readClientData();
+            dataToReceiveFromServer = dataToSendToServer;
+            printData();
+        }
     }
 
     /**
@@ -86,6 +107,31 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void readClientData() {
+        try {
+            String input= inFromStd.next();
+            if (input == "DONE") {
+                this.closeConnection = true;
+            }
+            else if(input.substring(0,8) == "SENDFILE"){
+                String filename= inFromStd.next();
+                dataToSendToServer= new FileClackData(this.userName,filename, dataToSendToServer.CONSTANT_SENDFILE);
+            }
+            else if (input == "LISTUSERS"){
+                System.out.println("Unable to perform at this time");
+            }
+            else
+            {
+                while (inFromStd.hasNext()){
+                    input= input + inFromStd.next();
+                }
+                dataToSendToServer = new data.MessageClackData(this.userName,input, dataToSendToServer.CONSTANT_SENDMESSAGE);
+            }
+            }catch(IOException ioe){
+                System.err.println("IO Exception occured");
+            }catch(FileNotFoundException fnfe){
+                dataToSendToServer=null;
+                System.err.println("File could not be found");
+            }
     }
 
     /**
@@ -109,6 +155,7 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void printData() {
+        System.out.println("Username: " +dataToReceiveFromServer.getUserName()+ "Type: "+ dataToReceiveFromServer.getType() + "Date: " +dataToReceiveFromServer.getDate());
     }
 
     /**

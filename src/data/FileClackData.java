@@ -1,5 +1,6 @@
 package data;
 
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -62,13 +63,48 @@ public class FileClackData extends ClackData {
     public String getData() {
         return this.fileContents;
     }
-
+    public String getData(String key)
+    {
+        return decrypt(fileContents,key);
+    }
     /**
      * Reads the file contents.
      * Does not return anything.
      * For now, it should have no code, just a declaration.
      */
     public void readFileContents() {
+        fileContents="";
+        File file = new File(fileName);
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String nextLine;
+            while ((nextLine = bufferedReader.readLine()) != null) {
+                fileContents= fileContents+nextLine;
+            }
+            bufferedReader.close();
+        }catch(FileNotFoundException fnfe){
+            System.err.println("File could not be found");
+        }catch(IOException ioe){
+            System.err.println("IOException occured");
+        }
+    }
+
+    public void readFileContents(String key)
+    {
+        fileContents="";
+        File file = new File(fileName);
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String nextLine;
+            while ((nextLine = bufferedReader.readLine()) != null) {
+                fileContents= fileContents+ encrypt(nextLine,key);
+            }
+            bufferedReader.close();
+        }catch(FileNotFoundException fnfe){
+            System.err.println("File could not be found");
+        }catch(IOException ioe){
+            System.err.println("IO Exception occured");
+        }
     }
 
     /**
@@ -77,6 +113,27 @@ public class FileClackData extends ClackData {
      * For now, it should have no code, just a declaration.
      */
     public void writeFileContents() {
+        try{
+            FileWriter myWriter=new FileWriter(fileName);
+            myWriter.write(fileContents);
+            myWriter.close();
+        }catch(FileNotFoundException fnfe){
+            System.err.println("File could not be found");
+        }catch(IOException ioe){
+            System.out.println("IO Exception occured");
+        }
+    }
+    public void writeFileContents(String key)
+    {
+        try{
+            FileWriter myWriter=new FileWriter(fileName);
+            myWriter.write(decrypt(fileContents,key));
+            myWriter.close();
+        }catch(FileNotFoundException fnfe){
+            System.err.println("File could not be found");
+        }catch(IOException ioe){
+            System.out.println("IO Exception occured");
+        }
     }
 
     @Override

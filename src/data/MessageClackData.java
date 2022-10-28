@@ -14,10 +14,15 @@ public class MessageClackData extends ClackData {
      * The constructor to set up the instance variables username, message, and type.
      * Should call the super constructor.
      *
-     * @param userName a string representing the name of the client user
+     * @param username a string representing the name of the client user
      * @param message  a string representing instant message
      * @param type     an int representing the data type
      */
+    public MessageClackData(String username, String message, String key, int type)
+    {
+        super(username,type);
+        this.message=encrypt(message,key);
+    }
     public MessageClackData(String userName, String message, int type) {
         super(userName, type);
         this.message = message;
@@ -41,9 +46,12 @@ public class MessageClackData extends ClackData {
      *
      * @return this.message
      */
-    public String getData() {
-        return this.message;
+    public String getData(){return this.message;}
+    public String getData(String key)
+    {
+        return decrypt(message,key);
     }
+
 
     @Override
     public int hashCode() {
