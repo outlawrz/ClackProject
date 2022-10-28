@@ -111,7 +111,7 @@ public class ClackClient {
             if (input.equals ("DONE")) {
                 this.closeConnection = true;
             }
-            else if(input.substring(0,8).equals("SENDFILE")){
+            else if((input.substring(0,8)).equals("SENDFILE")){
                 String filename= inFromStd.next();
                 dataToSendToServer= new FileClackData(this.userName,filename, dataToSendToServer.CONSTANT_SENDFILE);
             }
@@ -184,7 +184,7 @@ public class ClackClient {
 
         int result = 23;
 
-        // It is okay to select only some of the instance variables to calculate the hash code
+        // It is okay to select only some instance variables to calculate the hash code
         // but must use the same instance variables with equals() to maintain consistency.
         result = 31 * result + Objects.hashCode(this.userName);
         result = 31 * result + Objects.hashCode(this.hostName);
@@ -209,7 +209,7 @@ public class ClackClient {
         ClackClient otherClackClient = (ClackClient) other;
 
         // Compares all comparable instance variables of both ClackClient objects that determine uniqueness.
-        // It is okay to select only some of the instance variables for comparison but must use the same
+        // It is okay to select only some instance variables for comparison but must use the same
         // instance variables with hashCode() to maintain consistency.
         return this.userName.equals(otherClackClient.userName) &&
                 this.hostName.equals(otherClackClient.hostName) &&
