@@ -1,5 +1,6 @@
 package data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  *
  * @author xinchaosong
  */
-public abstract class ClackData {
+public abstract class ClackData implements Serializable {
     /**
      * For giving a listing of all users connected to this session.
      */

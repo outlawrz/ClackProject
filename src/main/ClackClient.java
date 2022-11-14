@@ -2,6 +2,7 @@ package main;
 
 import data.ClackData;
 import data.FileClackData;
+import java.io.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class ClackClient {
     private ClackData dataToReceiveFromServer; // A ClackData object representing the data received from the server
     private Scanner inFromStd;
     private final static String CONSTANT_KEY= "RAMP";
+    private ObjectInputStream inFromServer;
+    private ObjectOutputStream outToServer;
     /**
      * The constructor to set up the username, host name, and port.
      * The connection should be set to be open (closeConnection = false).
@@ -44,6 +47,8 @@ public class ClackClient {
         this.closeConnection = false;
         this.dataToSendToServer = null;
         this.dataToReceiveFromServer = null;
+        this.inFromServer = null;
+        this.outToServer = null;
         if(userName==null){
             throw new IllegalArgumentException("Invalid Argument for user name");
         }
