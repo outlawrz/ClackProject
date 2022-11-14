@@ -113,13 +113,66 @@ public abstract class ClackData {
      * @return data
      */
     public abstract String getData();
-    protected String encrypt(String inputStringtoEncrypt, String key)
-    {
-        return "booty";
+    protected String encrypt( String inputStringtoEncrypt, String key ){
+        String resultString = "";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int ind = 0;
+
+        if(key == null){ key = "a"; }
+
+        if(inputStringtoEncrypt == null){ return ""; }
+
+        for(int i = 0; i < inputStringtoEncrypt.length(); i++){
+            String s = inputStringtoEncrypt.split("")[i];
+            int k = alphabet.indexOf(key.toLowerCase().split("")[ind % key.length()]);
+
+            if(alphabet.contains(s)){
+                resultString += alphabet.split("")[(alphabet.indexOf(s) + k) % 26];
+                ++ind;
+            } else if (alphabet.toUpperCase().contains(s)) {
+                resultString += alphabet.split("")[(alphabet.toUpperCase().indexOf(s) + k) % 26];
+                ++ind;
+            } else {
+                resultString += s;
+            }
+        }
+
+        return resultString;
     }
-    protected String decrypt(String inputStringtoDecrypt, String key)
-    {
-        return "cheeks";
+
+    protected String decrypt( String inputStringtoDecrypt, String key ){
+        String resultString = "";
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int ind = 0;
+
+        if(key == null){ key = "a"; }
+
+        if(inputStringtoDecrypt == null){ return ""; }
+
+        for(int i = 0; i < inputStringtoDecrypt.length(); i++){
+            String s = inputStringtoDecrypt.split("")[i];
+            int k = alphabet.indexOf(key.toLowerCase().split("")[ind % key.length()]);
+
+            if(alphabet.contains(s)){
+                if(alphabet.indexOf(s) - k < 0){
+                    resultString += alphabet.split("")[26 + (alphabet.indexOf(s) - k)];
+                } else {
+                    resultString += alphabet.split("")[(alphabet.indexOf(s) - k) % 26];
+                }
+                ++ind;
+            } else if (alphabet.toUpperCase().contains(s)) {
+                if(alphabet.toUpperCase().indexOf(s) - k < 0){
+                    resultString += alphabet.toUpperCase().split("")[26 + (alphabet.toUpperCase().indexOf(s) - k)];
+                } else {
+                    resultString += alphabet.toUpperCase().split("")[(alphabet.toUpperCase().indexOf(s) - k) % 26];
+                }
+                ++ind;
+            } else {
+                resultString += s;
+            }
+        }
+
+        return resultString;
     }
 
 }
