@@ -3,6 +3,7 @@ package main;
 import data.ClackData;
 import data.FileClackData;
 import java.io.*;
+import java.net.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,8 +30,9 @@ public class ClackClient {
     private ClackData dataToReceiveFromServer; // A ClackData object representing the data received from the server
     private Scanner inFromStd;
     private final static String CONSTANT_KEY= "RAMP";
-    private ObjectInputStream inFromServer;
     private ObjectOutputStream outToServer;
+    private ObjectInputStream inFromServer;
+
     /**
      * The constructor to set up the username, host name, and port.
      * The connection should be set to be open (closeConnection = false).
@@ -98,14 +100,31 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void start() {
-        InputStreamReader inputStream = new InputStreamReader(System.in);
-        Scanner inFromStd = new Scanner(inputStream);
-        while(!closeConnection) {
-            readClientData();
-            dataToReceiveFromServer = dataToSendToServer;
-            printData();
+        try{
+            Socket skt = new Socket(hostName, port);
+
+            InputStreamReader inputStream = new InputStreamReader(System.in);
+            outToServer = new ObjectOutputStream(skt.getOutputStream());
+            inFromServer = new ObjectInputStream(skt.getInputStream());
+            Scanner inFromStd = new Scanner(inputStream);
+            while(!closeConnection) {
+                readClientData();
+                sendData();
+                receiveData();
+                printData();
+            }
+            this.inFromStd.close();
+            skt.close();
+        }catch(UnknownHostException uhe){
+            System.err.println("Unknown host");
+        }catch(NoRouteToHostException nrthe){
+            System.err.println("Could not find host");
+        }catch(ConnectException ce){
+            System.err.println("Connection refused");
+        }catch(IOException ioe){
+            System.err.println("Error in closing or reading file");
         }
-        this.inFromStd.close();
+
     }
 
     /**
@@ -139,6 +158,13 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void sendData() {
+        try {
+            outToServer.writeObject(dataToSendToServer);
+            outToServer.close();
+        }catch(IOException ioe){
+            System.err.println("Error in writing to or closing stream");
+        }
+
     }
 
     /**
