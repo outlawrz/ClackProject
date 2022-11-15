@@ -117,7 +117,19 @@ public class ClackClient {
             skt.close();
         }catch(UnknownHostException uhe){
             System.err.println("Unknown host");
-        }catch(NoRouteToHostException nrthe){
+        }catch(SecurityException se){
+            System.err.println("Untrusted subclass tried to override security-sensitive methods");
+        }
+        catch(IllegalStateException ise){
+            System.err.println("Attempted to perform search operations after scanner had closed");
+        }
+        catch(NullPointerException npe){
+            System.err.println("Stream is null");
+        }
+        catch(StreamCorruptedException sce){
+            System.err.println("Stream header is incorrect");
+        }
+        catch(NoRouteToHostException nrthe){
             System.err.println("Could not find host");
         }catch(ConnectException ce){
             System.err.println("Connection refused");
