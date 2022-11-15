@@ -162,7 +162,7 @@ public class ClackClient {
             outToServer.writeObject(dataToSendToServer);
             outToServer.close();
         }catch(IOException ioe){
-            System.err.println("Error in writing to or closing stream");
+            System.err.println("Error in writing to stream or closing stream");
         }
 
     }
@@ -173,6 +173,16 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void receiveData() {
+        try{
+            dataToReceiveFromServer = (ClackData) inFromServer.readObject();
+            inFromServer.close();
+        }catch(IOException ioe){
+            System.err.println("Error in reading or closing the stream");
+        }catch(ClassNotFoundException cnfe){
+            System.err.println("Error in finding object from stream");
+        }
+
+
     }
 
     /**
