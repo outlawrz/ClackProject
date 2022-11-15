@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e89d458f-a726-409b-b15c-2c3c7efc0ea7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ClackClient_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ClackClient_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e89d458f-a726-409b-b15c-2c3c7efc0ea7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +179,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668553549700</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="jar file">
+      <created>1668553952892</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668553952892</updated>
+    </task>
+    <task id="LOCAL-00017" summary="jar file">
+      <created>1668554050492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668554050492</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
