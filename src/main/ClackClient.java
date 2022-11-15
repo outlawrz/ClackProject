@@ -4,12 +4,15 @@ import data.ClackData;
 import data.FileClackData;
 import java.io.*;
 import java.net.*;
+import java.lang.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Scanner;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * The ClackClient class represents the client user. A ClackClient object contains the username,
@@ -284,5 +287,37 @@ public class ClackClient {
                 + "Connection status: " + (this.closeConnection ? "Closed" : "Open") + "\n"
                 + "Data to send to the server: " + this.dataToSendToServer + "\n"
                 + "Data to receive from the server: " + this.dataToReceiveFromServer + "\n";
+    }
+    public void main()
+    {
+        try {
+            BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
+            String line = bufferedreader.readLine();
+            String newline = line.substring(15);
+            if(newline.isEmpty()){
+                ClackClient client = new ClackClient();
+                client.start();
+            }
+            else if(newline.contains("@")&& newline.contains(":"))
+            {
+                String uname= newline.substring(0,newline.indexOf("@"));
+                String hname= newline.substring(line.indexOf("@")+1,newline.indexOf(":"));
+                int portnum= parseInt(newline.substring(newline.indexOf(":")));
+                ClackClient client = new ClackClient(uname,hname,portnum);
+                client.start();
+            }
+            else if(newline.contains("@")){
+                String uname= newline.substring(0,newline.indexOf("@"));
+                String hname= newline.substring(newline.indexOf("@")+1);
+                ClackClient client = new ClackClient(uname,hname);
+                client.start();
+            }
+            else{
+                ClackClient client = new ClackClient(newline);
+                client.start();
+            }
+        }catch(IOException ioe){
+            System.err.println("Error reading from buffer");
+        }
     }
 }

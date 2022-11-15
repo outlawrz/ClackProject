@@ -131,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668481480178</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="start methods">
+      <created>1668528263528</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668528263528</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +146,7 @@
     <MESSAGE value="object input and output streams" />
     <MESSAGE value="senddata" />
     <MESSAGE value="receive data" />
-    <option name="LAST_COMMIT_MESSAGE" value="receive data" />
+    <MESSAGE value="start methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="start methods" />
   </component>
 </project>

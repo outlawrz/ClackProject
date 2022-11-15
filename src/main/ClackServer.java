@@ -6,6 +6,9 @@ import java.nio.channels.IllegalBlockingModeException;
 import java.util.Objects;
 import java.net.*;
 import java.io.*;
+import java.lang.*;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * The ClackServer class is a blueprint for a ClackServer object that contains information about the
@@ -176,5 +179,23 @@ public class ClackServer {
                 + "Connection status: " + (this.closeConnection ? "Closed" : "Open") + "\n"
                 + "Data to receive from the client: " + this.dataToReceiveFromClient + "\n"
                 + "Data to send to the client: " + this.dataToSendToClient + "\n";
+    }
+    public void main()
+    {
+        try{
+            BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
+            String line = bufferedreader.readLine();
+            String newline = line.substring(15);
+            if(newline.isEmpty()){
+                ClackServer server = new ClackServer();
+                server.start();
+            }
+            else{
+                ClackServer server = new ClackServer(parseInt(newline));
+                server.start();
+            }
+        }catch(IOException ioe){
+            System.err.println("Error reading from buffer");
+        }
     }
 }
