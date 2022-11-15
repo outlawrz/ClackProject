@@ -180,7 +180,7 @@ public class ClackServer {
                 + "Data to receive from the client: " + this.dataToReceiveFromClient + "\n"
                 + "Data to send to the client: " + this.dataToSendToClient + "\n";
     }
-    public void main()
+    public static void main(String args[])
     {
         try{
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));

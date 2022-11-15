@@ -288,32 +288,31 @@ public class ClackClient {
                 + "Data to send to the server: " + this.dataToSendToServer + "\n"
                 + "Data to receive from the server: " + this.dataToReceiveFromServer + "\n";
     }
-    public void main()
+    public static void main(String args[])
     {
         try {
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
             String line = bufferedreader.readLine();
-            String newline = line.substring(15);
-            if(newline.isEmpty()){
+            if(line.isEmpty()){
                 ClackClient client = new ClackClient();
                 client.start();
             }
-            else if(newline.contains("@")&& newline.contains(":"))
+            else if(line.contains("@")&& line.contains(":"))
             {
-                String uname= newline.substring(0,newline.indexOf("@"));
-                String hname= newline.substring(line.indexOf("@")+1,newline.indexOf(":"));
-                int portnum= parseInt(newline.substring(newline.indexOf(":")));
+                String uname= line.substring(0,line.indexOf("@"));
+                String hname= line.substring(line.indexOf("@")+1,line.indexOf(":"));
+                int portnum= parseInt(line.substring(line.indexOf(":")));
                 ClackClient client = new ClackClient(uname,hname,portnum);
                 client.start();
             }
-            else if(newline.contains("@")){
-                String uname= newline.substring(0,newline.indexOf("@"));
-                String hname= newline.substring(newline.indexOf("@")+1);
+            else if(line.contains("@")){
+                String uname= line.substring(0,line.indexOf("@"));
+                String hname= line.substring(line.indexOf("@")+1);
                 ClackClient client = new ClackClient(uname,hname);
                 client.start();
             }
             else{
-                ClackClient client = new ClackClient(newline);
+                ClackClient client = new ClackClient(line);
                 client.start();
             }
         }catch(IOException ioe){
