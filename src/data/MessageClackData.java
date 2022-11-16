@@ -20,8 +20,8 @@ public class MessageClackData extends ClackData {
      */
     public MessageClackData(String username, String message, String key, int type)
     {
-        super(username,type);
-        this.message=encrypt(message,key);
+        super(username, type);
+        this.message = encrypt(message,key);
     }
     public MessageClackData(String userName, String message, int type) {
         super(userName, type);
@@ -46,10 +46,10 @@ public class MessageClackData extends ClackData {
      *
      * @return this.message
      */
-    public String getData(){return this.message;}
+    public String getData(){ return this.message; }
     public String getData(String key)
     {
-        return decrypt(message,key);
+        return decrypt(message, key);
     }
 
 

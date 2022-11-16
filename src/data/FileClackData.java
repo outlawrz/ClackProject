@@ -65,7 +65,7 @@ public class FileClackData extends ClackData {
     }
     public String getData(String key)
     {
-        return decrypt(fileContents,key);
+        return decrypt(fileContents, key);
     }
     /**
      * Reads the file contents.
@@ -79,7 +79,7 @@ public class FileClackData extends ClackData {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String nextLine;
             while ((nextLine = bufferedReader.readLine()) != null) {
-                fileContents= fileContents+nextLine;
+                fileContents = fileContents + nextLine;
             }
             bufferedReader.close();
         }catch(FileNotFoundException fnfe){

@@ -11,16 +11,16 @@ public class TestClackClient {
     public static void main(String[] args) {
         // All four constructors of ClackClient
         ClackClient clackClient1 = new ClackClient("testUser1", "hostName1", 12345);
-        ClackClient clackClient2 = new ClackClient("testUser2", "hostName2", 7000);
-        ClackClient clackClient3 = new ClackClient("testUser3", "localhost", 7000);
-        ClackClient clackClient4 = new ClackClient("Anon", "localhost", 7000);
+        ClackClient clackClient2 = new ClackClient("testUser2", "hostName2", 7420);
+        ClackClient clackClient3 = new ClackClient("testUser3", "localhost", 7420);
+        ClackClient clackClient4 = new ClackClient("Anon", "localhost", 7420);
         ClackClient clackClient5 = new ClackClient("testUser2", "hostName2");
         ClackClient clackClient6 = new ClackClient("testUser3", "localhost");
         ClackClient clackClient7 = new ClackClient("Anon", "localhost");
         ClackClient clackClient8 = new ClackClient("testUser3");
         ClackClient clackClient9 = new ClackClient("Anon");
         ClackClient clackClient10 = new ClackClient();
-        ClackClient clackClient11 = new ClackClient(null);
+        //ClackClient clackClient11 = new ClackClient(null);
 
         // getUserName()
         System.out.println("clackClient1 getUserName(): " + clackClient1.getUserName());
@@ -33,7 +33,7 @@ public class TestClackClient {
         System.out.println("clackClient8 getUserName(): " + clackClient8.getUserName());
         System.out.println("clackClient9 getUserName(): " + clackClient9.getUserName());
         System.out.println("clackClient10 getUserName(): " + clackClient10.getUserName());
-        System.out.println("clackClient11 getUserName(): " + clackClient11.getUserName());
+        //System.out.println("clackClient11 getUserName(): " + clackClient11.getUserName());
         System.out.println();
 
         // getHostName()
@@ -47,7 +47,7 @@ public class TestClackClient {
         System.out.println("clackClient8 getHostName(): " + clackClient8.getHostName());
         System.out.println("clackClient9 getHostName(): " + clackClient9.getHostName());
         System.out.println("clackClient10 getHostName(): " + clackClient10.getHostName());
-        System.out.println("clackClient11 getHostName(): " + clackClient11.getHostName());
+        //System.out.println("clackClient11 getHostName(): " + clackClient11.getHostName());
         System.out.println();
 
         // getPort()
@@ -61,7 +61,7 @@ public class TestClackClient {
         System.out.println("clackClient8 getPort(): " + clackClient8.getPort());
         System.out.println("clackClient9 getPort(): " + clackClient9.getPort());
         System.out.println("clackClient10 getPort(): " + clackClient10.getPort());
-        System.out.println("clackClient11 getPort(): " + clackClient11.getPort());
+        //System.out.println("clackClient11 getPort(): " + clackClient11.getPort());
         System.out.println();
 
         // hashCode()
@@ -75,7 +75,7 @@ public class TestClackClient {
         System.out.println("clackClient8 hashCode(): " + clackClient8.hashCode());
         System.out.println("clackClient9 hashCode(): " + clackClient9.hashCode());
         System.out.println("clackClient10 hashCode(): " + clackClient10.hashCode());
-        System.out.println("clackClient11 hashCode(): " + clackClient11.hashCode());
+        //System.out.println("clackClient11 hashCode(): " + clackClient11.hashCode());
         System.out.println();
 
         // equals()
@@ -118,7 +118,7 @@ public class TestClackClient {
         System.out.println("clackClient8:\n" + clackClient8);
         System.out.println("clackClient9:\n" + clackClient9);
         System.out.println("clackClient10:\n" + clackClient10);
-        System.out.println("clackClient11:\n" + clackClient10);
+        //System.out.println("clackClient11:\n" + clackClient10);
 
         clackClient1.start();
         clackClient2.start();
@@ -130,7 +130,7 @@ public class TestClackClient {
         clackClient8.start();
         clackClient9.start();
         clackClient10.start();
-        clackClient11.start();
+        //clackClient11.start();
 
     }
 }

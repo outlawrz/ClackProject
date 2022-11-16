@@ -41,9 +41,9 @@ public class ClackServer {
             this.closeConnection = false;
             this.dataToReceiveFromClient = null;
             this.dataToSendToClient = null;
-            outToClient=null;
-            inFromClient=null;
-        }catch(IllegalArgumentException iae){
+            outToClient = null;
+            inFromClient = null;
+        } catch(IllegalArgumentException iae){
             System.err.println("Port number is less than 1024");
         }
 
@@ -55,7 +55,7 @@ public class ClackServer {
      * This constructor should call another constructor.
      */
     public ClackServer() {
-        this(DEFAULT_PORT);
+        this.port = DEFAULT_PORT;
     }
 
     /**
@@ -64,55 +64,49 @@ public class ClackServer {
      * For now, it should have no code, just a declaration.
      */
     public void start() {
-        try{
+        try {
             ServerSocket sskt = new ServerSocket(port);
             Socket cskt = sskt.accept();
+            System.out.println("New connection on Port: " + cskt.getPort() + ", LocalPort: " + cskt.getLocalPort() + "\n-");
             outToClient = new ObjectOutputStream(cskt.getOutputStream());
             inFromClient = new ObjectInputStream(cskt.getInputStream());
             while(!closeConnection) {
-
                 receiveData();
                 dataToSendToClient = dataToReceiveFromClient;
                 sendData();
             }
-        }catch(SecurityException se){
+        } catch(SecurityException se){
             System.err.println("Operation not allowed for security reasons");
-        }catch(IllegalArgumentException iae){
+        } catch(IllegalArgumentException iae){
             System.err.println("Port number not allowed");
 
-        }catch(SocketTimeoutException ste){
+        } catch(SocketTimeoutException ste){
             System.err.println("Socket took too long to connect");
-        }
-        catch(IllegalBlockingModeException ibme){
+        } catch(IllegalBlockingModeException ibme){
             System.err.println("Socket has an associated channel, not ready to connect");
-        }
-        catch(NullPointerException npe){
+        } catch(NullPointerException npe){
             System.err.println("Stream is null");
-        }
-        catch(StreamCorruptedException sce){
+        } catch(StreamCorruptedException sce){
             System.err.println("Stream header could not be found");
-        }
-        catch(IOException ioe){
+        } catch(IOException ioe){
             System.err.println("Input/Output error in stream");
         }
     }
 
     /**
      * Receives data from client.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
      */
     public void receiveData() {
-        try{
+        try {
             dataToReceiveFromClient = (ClackData) inFromClient.readObject();
-            System.out.println(dataToReceiveFromClient);
-            if(dataToReceiveFromClient.getType()==1){
-                closeConnection=true;
+            if (dataToReceiveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
+                closeConnection = true;
+            } else {
+                System.out.println(dataToReceiveFromClient);
             }
-            inFromClient.close();
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.err.println("Error in reading or closing the stream");
-        }catch(ClassNotFoundException cnfe){
+        } catch (ClassNotFoundException cnfe) {
             System.err.println("Error in finding object from stream");
         }
     }
@@ -125,9 +119,10 @@ public class ClackServer {
     public void sendData() {
         try {
             outToClient.writeObject(dataToSendToClient);
-            outToClient.close();
-        }catch(IOException ioe){
+            //outToClient.close();
+        } catch (IOException ioe) {
             System.err.println("Error in writing to stream or closing stream");
+            closeConnection = true;
         }
     }
 
@@ -182,20 +177,23 @@ public class ClackServer {
     }
     public static void main(String args[])
     {
-        try{
+        try {
+            System.out.println("Type port or press enter to use default port: ");
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
             String line = bufferedreader.readLine();
-            String newline = line.substring(15);
-            if(newline.isEmpty()){
+            String newline = line;
+            if (newline.isEmpty()) {
                 ClackServer server = new ClackServer();
+                System.out.println("Using port: " + DEFAULT_PORT);
                 server.start();
-            }
-            else{
+            } else {
                 ClackServer server = new ClackServer(parseInt(newline));
+                System.out.println("Using port: " + newline);
                 server.start();
             }
-        }catch(IOException ioe){
+        } catch(IOException ioe) {
             System.err.println("Error reading from buffer");
         }
     }
+
 }
