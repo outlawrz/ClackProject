@@ -27,7 +27,7 @@ import static java.lang.Integer.parseInt;
  * @author Xinchao Song
  */
 public class ClackClient {
-    private static final int DEFAULT_PORT = 7420;  // The default port number
+    private static final int DEFAULT_PORT = 1738;  // The default port number
 
     private String userName;  // A string representing the name of the client
     private String hostName;  // A string representing the name of the computer representing the server
