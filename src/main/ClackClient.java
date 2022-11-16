@@ -2,6 +2,8 @@ package main;
 
 import data.ClackData;
 import data.FileClackData;
+import data.MessageClackData;
+
 import java.io.*;
 import java.net.*;
 import java.lang.*;
@@ -9,6 +11,8 @@ import java.lang.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -23,7 +27,7 @@ import static java.lang.Integer.parseInt;
  * @author Xinchao Song
  */
 public class ClackClient {
-    private static final int DEFAULT_PORT = 7000;  // The default port number
+    private static final int DEFAULT_PORT = 7420;  // The default port number
 
     private String userName;  // A string representing the name of the client
     private String hostName;  // A string representing the name of the computer representing the server
@@ -54,14 +58,13 @@ public class ClackClient {
         this.dataToReceiveFromServer = null;
         this.inFromServer = null;
         this.outToServer = null;
-        if(userName==null){
+        if(userName==null) {
             throw new IllegalArgumentException("Invalid Argument for user name");
         }
-        if(hostName==null){
+        if(hostName==null) {
             throw new IllegalArgumentException("Invalid Argument for host name");
         }
-        if(port<1024)
-        {
+        if(port<1024) {
             throw new IllegalArgumentException("Port number is not large enough");
         }
     }
@@ -99,44 +102,42 @@ public class ClackClient {
 
     /**
      * Starts the client.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
      */
     public void start() {
-        try{
-            Socket skt = new Socket(hostName, port);
+        try {
+            Socket skt = new Socket("localhost", port);
+            System.out.println("Connected.\n-");
 
             InputStreamReader inputStream = new InputStreamReader(System.in);
             outToServer = new ObjectOutputStream(skt.getOutputStream());
             inFromServer = new ObjectInputStream(skt.getInputStream());
-            Scanner inFromStd = new Scanner(inputStream);
+            inFromStd = new Scanner(inputStream);
             while(!closeConnection) {
                 readClientData();
                 sendData();
                 receiveData();
                 printData();
+                System.out.println("-");
             }
-            this.inFromStd.close();
+            inFromStd.close();
+            inFromServer.close();
+            outToServer.close();
             skt.close();
-        }catch(UnknownHostException uhe){
+        } catch(UnknownHostException uhe) {
             System.err.println("Unknown host");
-        }catch(SecurityException se){
+        } catch(SecurityException se) {
             System.err.println("Untrusted subclass tried to override security-sensitive methods");
-        }
-        catch(IllegalStateException ise){
+        } catch(IllegalStateException ise) {
             System.err.println("Attempted to perform search operations after scanner had closed");
-        }
-        catch(NullPointerException npe){
+        } catch(NullPointerException npe) {
             System.err.println("Stream is null");
-        }
-        catch(StreamCorruptedException sce){
+        } catch(StreamCorruptedException sce) {
             System.err.println("Stream header is incorrect");
-        }
-        catch(NoRouteToHostException nrthe){
+        } catch(NoRouteToHostException nrthe) {
             System.err.println("Could not find host");
-        }catch(ConnectException ce){
+        } catch(ConnectException ce) {
             System.err.println("Connection refused");
-        }catch(IOException ioe){
+        } catch(IOException ioe) {
             System.err.println("Error in closing or reading file");
         }
 
@@ -148,23 +149,19 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void readClientData() {
-            String input= inFromStd.next();
-            if (input.equals ("DONE")) {
-                this.closeConnection = true;
-            }
-            else if((input.substring(0,8)).equals("SENDFILE")){
-                String filename= inFromStd.next();
-                dataToSendToServer= new FileClackData(this.userName,filename, dataToSendToServer.CONSTANT_SENDFILE);
-            }
-            else if (input.equals("LISTUSERS")){
-                System.out.println("Unable to perform at this time");
-            }
-            else {
-                while (inFromStd.hasNext()) {
-                    input = input + inFromStd.next();
-                }
-                dataToSendToServer = new data.MessageClackData(this.userName, input, dataToSendToServer.CONSTANT_SENDMESSAGE);
-            }
+        String input = inFromStd.next();
+        if (input.equals("LOGOUT") || input.equals("DONE")) {
+            closeConnection = true;
+            dataToSendToServer = new MessageClackData(this.userName, "", dataToSendToServer.CONSTANT_LOGOUT);
+        } else if(input.length() >= 8 && input.substring(0,7).equals("SENDFILE")) {
+            String filename = inFromStd.next();
+            dataToSendToServer = new FileClackData(this.userName, filename, dataToSendToServer.CONSTANT_SENDFILE);
+        } else if (input.equals("LISTUSERS")) {
+            System.out.println("Unable to perform at this time");
+        } else {
+            input += inFromStd.nextLine();
+            dataToSendToServer = new data.MessageClackData(this.userName, input, dataToSendToServer.CONSTANT_SENDMESSAGE);
+        }
     }
 
     /**
@@ -175,11 +172,10 @@ public class ClackClient {
     public void sendData() {
         try {
             outToServer.writeObject(dataToSendToServer);
-            outToServer.close();
-        }catch(IOException ioe){
+            //outToServer.close();
+        } catch (IOException ioe) {
             System.err.println("Error in writing to stream or closing stream");
         }
-
     }
 
     /**
@@ -188,16 +184,14 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void receiveData() {
-        try{
+        try {
             dataToReceiveFromServer = (ClackData) inFromServer.readObject();
-            inFromServer.close();
-        }catch(IOException ioe){
+            //inFromServer.close();
+        } catch (IOException ioe) {
             System.err.println("Error in reading or closing the stream");
-        }catch(ClassNotFoundException cnfe){
+        } catch (ClassNotFoundException cnfe) {
             System.err.println("Error in finding object from stream");
         }
-
-
     }
 
     /**
@@ -205,7 +199,12 @@ public class ClackClient {
      * For now, it should have no code, just a declaration.
      */
     public void printData() {
-        System.out.println("Username: " +dataToReceiveFromServer.getUserName()+ "Type: "+ dataToReceiveFromServer.getType() + "Date: " +dataToReceiveFromServer.getDate());
+        if (dataToReceiveFromServer.getType() == ClackData.CONSTANT_LOGOUT) {
+            System.out.println("Logging out.");
+        } else {
+            System.out.println("Username: " + dataToReceiveFromServer.getUserName() + ", Type: " + dataToReceiveFromServer.getType() + ", Date: " + dataToReceiveFromServer.getDate());
+            System.out.println(dataToReceiveFromServer.getData());
+        }
     }
 
     /**
@@ -291,31 +290,33 @@ public class ClackClient {
     public static void main(String args[])
     {
         try {
+            System.out.println("Type username@hostname:port or press enter to use defaults: ");
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
             String line = bufferedreader.readLine();
-            if(line.isEmpty()){
+            if (line.isEmpty()) {
                 ClackClient client = new ClackClient();
+                System.out.println("Using username: Anon, hostname: localhost, port: " + DEFAULT_PORT);
                 client.start();
-            }
-            else if(line.contains("@")&& line.contains(":"))
-            {
+            } else if(line.contains("@")&& line.contains(":")) {
                 String uname= line.substring(0,line.indexOf("@"));
                 String hname= line.substring(line.indexOf("@")+1,line.indexOf(":"));
                 int portnum= parseInt(line.substring(line.indexOf(":")));
-                ClackClient client = new ClackClient(uname,hname,portnum);
+                ClackClient client = new ClackClient(uname, hname, portnum);
+                System.out.println("Using Username: " + uname + ", Hostname: " + hname + ", Port: " + portnum);
                 client.start();
-            }
-            else if(line.contains("@")){
+            } else if(line.contains("@")) {
                 String uname= line.substring(0,line.indexOf("@"));
                 String hname= line.substring(line.indexOf("@")+1);
-                ClackClient client = new ClackClient(uname,hname);
+                ClackClient client = new ClackClient(uname, hname);
+                System.out.println("Using Username: " + uname + ", Hostname: " + hname + ", Port: " + DEFAULT_PORT);
                 client.start();
             }
-            else{
+            else {
                 ClackClient client = new ClackClient(line);
+                System.out.println("Using Username: " + line + ", Hostname: localhost, Port: " + DEFAULT_PORT);
                 client.start();
             }
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             System.err.println("Error reading from buffer");
         }
     }

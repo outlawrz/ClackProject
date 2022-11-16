@@ -11,7 +11,7 @@ public class TestClackServer {
     public static void main(String[] args) {
         // All three constructors of ClackServer
         ClackServer clackServer1 = new ClackServer(12345);
-        ClackServer clackServer2 = new ClackServer(7000);
+        ClackServer clackServer2 = new ClackServer(7420);
         ClackServer clackServer3 = new ClackServer();
         ClackServer clackServer4 = new ClackServer(-99);
 
