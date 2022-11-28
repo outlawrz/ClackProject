@@ -112,11 +112,11 @@ public class ClackClient {
             outToServer = new ObjectOutputStream(skt.getOutputStream());
             inFromServer = new ObjectInputStream(skt.getInputStream());
             inFromStd = new Scanner(inputStream);
+            ClientSideServerListener listener = new ClientSideServerListener(new ClackClient(this.userName, this.hostName, this.port));
+            Thread listenerThread = new Thread(listener);
             while(!closeConnection) {
                 readClientData();
                 sendData();
-                receiveData();
-                printData();
                 System.out.println("-");
             }
             inFromStd.close();
@@ -231,6 +231,10 @@ public class ClackClient {
      */
     public int getPort() {
         return this.port;
+    }
+
+    public boolean getCloseConnection() {
+        return this.closeConnection;
     }
 
     @Override
