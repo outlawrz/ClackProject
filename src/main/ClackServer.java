@@ -127,6 +127,14 @@ public class ClackServer {
         }
     }
 
+    public void broadcast(ClackData dataToBroadcastToClients){
+
+    }
+
+    public void remove(ServerSideClientIO serverSideClientToRemove){
+
+    }
+
     /**
      * Returns the port.
      *
