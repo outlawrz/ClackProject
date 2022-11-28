@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9d03140-0b98-488c-a8ec-d141bbc6841c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/ServerSideClientIO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -299,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669673140056</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="serversideclientio class">
+      <created>1669675536028</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1669675536028</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,6 +329,7 @@
     <MESSAGE value="jar file" />
     <MESSAGE value="workspace" />
     <MESSAGE value="mutithreading on client side" />
-    <option name="LAST_COMMIT_MESSAGE" value="mutithreading on client side" />
+    <MESSAGE value="serversideclientio class" />
+    <option name="LAST_COMMIT_MESSAGE" value="serversideclientio class" />
   </component>
 </project>
