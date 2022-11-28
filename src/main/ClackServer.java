@@ -66,6 +66,7 @@ public class ClackServer {
     public void start() {
         try {
             ServerSocket sskt = new ServerSocket(port);
+            System.out.println(sskt);
             Socket cskt = sskt.accept();
             System.out.println("New connection on Port: " + cskt.getPort() + ", LocalPort: " + cskt.getLocalPort() + "\n-");
             outToClient = new ObjectOutputStream(cskt.getOutputStream());

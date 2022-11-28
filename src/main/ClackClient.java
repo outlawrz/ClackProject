@@ -196,7 +196,6 @@ public class ClackClient {
 
     /**
      * Prints the received data to the standard output.
-     * For now, it should have no code, just a declaration.
      */
     public void printData() {
         if (dataToReceiveFromServer.getType() == ClackData.CONSTANT_LOGOUT) {
