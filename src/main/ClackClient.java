@@ -157,7 +157,8 @@ public class ClackClient {
             String filename = inFromStd.next();
             dataToSendToServer = new FileClackData(this.userName, filename, dataToSendToServer.CONSTANT_SENDFILE);
         } else if (input.equals("LISTUSERS")) {
-            System.out.println("Unable to perform at this time");
+            ClackServer server = new ClackServer(this.port);
+            System.out.println(server.getServerSideClientIOList());
         } else {
             input += inFromStd.nextLine();
             dataToSendToServer = new data.MessageClackData(this.userName, input, dataToSendToServer.CONSTANT_SENDMESSAGE);

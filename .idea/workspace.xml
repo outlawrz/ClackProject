@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9d03140-0b98-488c-a8ec-d141bbc6841c" name="Changes" comment="">
+    <list default="true" id="e9d03140-0b98-488c-a8ec-d141bbc6841c" name="Changes" comment="broadcast and remove">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -320,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669677769838</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="broadcast and remove">
+      <created>1669694671746</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1669694671746</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -346,6 +354,7 @@
     <MESSAGE value="mutithreading on client side" />
     <MESSAGE value="serversideclientio class" />
     <MESSAGE value="clackserver without broadcast and remove" />
-    <option name="LAST_COMMIT_MESSAGE" value="clackserver without broadcast and remove" />
+    <MESSAGE value="broadcast and remove" />
+    <option name="LAST_COMMIT_MESSAGE" value="broadcast and remove" />
   </component>
 </project>

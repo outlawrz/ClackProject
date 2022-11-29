@@ -125,6 +125,12 @@ public class ClackServer {
         return this.port;
     }
 
+    public ArrayList<ServerSideClientIO> getServerSideClientIOList(){
+        return this.serverSideClientIOList;
+    }
+
+
+
 
     @Override
     public int hashCode() {
