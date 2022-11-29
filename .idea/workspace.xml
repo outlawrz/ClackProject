@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9d03140-0b98-488c-a8ec-d141bbc6841c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/ClientSideServerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClientSideServerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ServerSideClientIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerSideClientIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669676963481</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="clackserver without broadcast and remove">
+      <created>1669677769838</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1669677769838</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

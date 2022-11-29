@@ -25,7 +25,7 @@ public class ClackServer {
 
     private int port; // An integer representing the port number on the server connected to
     private boolean closeConnection; // A boolean representing whether the connection is closed or not
-    private ArrayList serverSideClientIOList;
+    private ArrayList<ServerSideClientIO> serverSideClientIOList;
     /**
      * The constructor that sets the port number.
      * Should set dataToReceiveFromClient and dataToSendToClient as null.
@@ -36,7 +36,7 @@ public class ClackServer {
         try{
             this.port = port;
             this.closeConnection = false;
-            serverSideClientIOList = new ArrayList();
+            serverSideClientIOList = new ArrayList<ServerSideClientIO>();
 
         } catch(IllegalArgumentException iae){
             System.err.println("Port number is less than 1024");
@@ -99,12 +99,21 @@ public class ClackServer {
      * For now, it should have no code, just a declaration.
      */
 
-    public void broadcast(ClackData dataToBroadcastToClients){
-
+    public synchronized void broadcast(ClackData dataToBroadcastToClients)
+    {
+        for(int i=0;i<serverSideClientIOList.size();i++){
+            serverSideClientIOList.get(i).setDataToSendToClient(dataToBroadcastToClients);
+            serverSideClientIOList.get(i).sendData();
+        }
     }
 
-    public void remove(ServerSideClientIO serverSideClientToRemove){
-
+    public synchronized void remove (ServerSideClientIO serverSideClientToRemove)
+    {
+        for(int i=0;i<serverSideClientIOList.size();i++){
+            if((this.serverSideClientIOList.get(i)).equals(serverSideClientToRemove)){
+                serverSideClientIOList.remove(i);
+            }
+        }
     }
 
     /**
