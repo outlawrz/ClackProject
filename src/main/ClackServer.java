@@ -36,7 +36,7 @@ public class ClackServer {
         try{
             this.port = port;
             this.closeConnection = false;
-            serverSideClientIOList = new ArrayList<ServerSideClientIO>();
+            this.serverSideClientIOList = new ArrayList<ServerSideClientIO>();
 
         } catch(IllegalArgumentException iae){
             System.err.println("Port number is less than 1024");

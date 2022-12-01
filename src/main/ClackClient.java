@@ -105,16 +105,23 @@ public class ClackClient {
      */
     public void start() {
         try {
-            Socket skt = new Socket("localhost", port);
+            Socket skt = new Socket(this.hostName , this.port);
             System.out.println("Connected.\n-");
 
+
+            System.out.println("The error is after this");
+            this.inFromServer = new ObjectInputStream(skt.getInputStream());
+            this.outToServer = new ObjectOutputStream(skt.getOutputStream());
             InputStreamReader inputStream = new InputStreamReader(System.in);
-            outToServer = new ObjectOutputStream(skt.getOutputStream());
-            inFromServer = new ObjectInputStream(skt.getInputStream());
             inFromStd = new Scanner(inputStream);
-            ClientSideServerListener listener = new ClientSideServerListener(new ClackClient(this.userName, this.hostName, this.port));
+
+
+            ClientSideServerListener listener = new ClientSideServerListener(this);
             Thread listenerThread = new Thread(listener);
+            listenerThread.start();
+
             while(!closeConnection) {
+
                 readClientData();
                 sendData();
                 System.out.println("-");
@@ -138,7 +145,7 @@ public class ClackClient {
         } catch(ConnectException ce) {
             System.err.println("Connection refused");
         } catch(IOException ioe) {
-            System.err.println("Error in closing or reading file");
+            System.err.println("Error in closing or reading input or output stream");
         }
 
     }
@@ -175,7 +182,7 @@ public class ClackClient {
             outToServer.writeObject(dataToSendToServer);
             //outToServer.close();
         } catch (IOException ioe) {
-            System.err.println("Error in writing to stream or closing stream");
+            System.err.println("Error in writing to stream or closing stream when sending to server");
         }
     }
 
@@ -304,7 +311,7 @@ public class ClackClient {
             } else if(line.contains("@")&& line.contains(":")) {
                 String uname= line.substring(0,line.indexOf("@"));
                 String hname= line.substring(line.indexOf("@")+1,line.indexOf(":"));
-                int portnum= parseInt(line.substring(line.indexOf(":")));
+                int portnum= parseInt(line.substring(line.indexOf(":")+1));
                 ClackClient client = new ClackClient(uname, hname, portnum);
                 System.out.println("Using Username: " + uname + ", Hostname: " + hname + ", Port: " + portnum);
                 client.start();
@@ -317,7 +324,7 @@ public class ClackClient {
             }
             else {
                 ClackClient client = new ClackClient(line);
-                System.out.println("Using Username: " + line + ", Hostname: localhost, Port: " + DEFAULT_PORT);
+                System.out.println("Using Username: " + line + ", Hostname: localhost ," + "Port: " + DEFAULT_PORT);
                 client.start();
             }
         } catch (IOException ioe) {
