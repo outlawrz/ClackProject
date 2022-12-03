@@ -35,7 +35,7 @@ public class ServerSideClientIO implements Runnable{
             outToClient = new ObjectOutputStream(clientSocket.getOutputStream());
             inFromClient = new ObjectInputStream(clientSocket.getInputStream());
             while(!closeConnection){
-                receiveData();
+                this.receiveData();
                 if (dataToReceieveFromClient instanceof ListUsersClackData) {
                     setDataToSendToClient(new MessageClackData("Server", this.server.LUClackData.getData(), ClackData.CONSTANT_LISTUSERS));
                     System.out.println(this.server.LUClackData.getData());
@@ -44,6 +44,7 @@ public class ServerSideClientIO implements Runnable{
                     this.server.broadcast(dataToReceieveFromClient);
                 }
                 this.server.broadcast(dataToSendToClient);
+                this.sendData();
             }
         }catch(IOException ioe){
             System.err.println("Error reading input or output stream");
@@ -55,7 +56,7 @@ public class ServerSideClientIO implements Runnable{
         try {
             dataToReceieveFromClient = (ClackData) inFromClient.readObject();
             if (dataToReceieveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
-                this.server.remove(this);
+                server.remove(this);
             } else {
                 System.out.println(dataToReceieveFromClient);
             }

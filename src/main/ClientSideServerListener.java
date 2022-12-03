@@ -1,7 +1,7 @@
 package main;
 
 public class ClientSideServerListener implements Runnable{
-    private ClackClient client;
+    private ClackClient client=null;
 
     ClientSideServerListener(ClackClient client){
         this.client = client;
@@ -9,7 +9,7 @@ public class ClientSideServerListener implements Runnable{
 
     @Override
     public void run(){
-        while (client.getCloseConnection()!=true){
+        while (!client.getCloseConnection()){
             client.receiveData();
             client.printData();
         }

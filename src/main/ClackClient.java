@@ -110,7 +110,6 @@ public class ClackClient {
             System.out.println("Connected.\n-");
 
 
-            System.out.println("The error is after this");
             inFromServer = new ObjectInputStream(skt.getInputStream());
             outToServer = new ObjectOutputStream(skt.getOutputStream());
 
