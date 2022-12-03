@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9d03140-0b98-488c-a8ec-d141bbc6841c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/data/ListUsersClackData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/ServerSideClientIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServerSideClientIO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +50,11 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\IntelliJ\ClackProject\main" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="data" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.ClackClient">
+  <component name="RunManager" selected="Application.ClackServer">
     <configuration name="ClackClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.ClackClient" />
       <module name="ClackProject" />
@@ -335,7 +340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669696810902</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="IO Exception error">
+      <created>1669860876913</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1669860876913</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -363,6 +375,7 @@
     <MESSAGE value="clackserver without broadcast and remove" />
     <MESSAGE value="broadcast and remove" />
     <MESSAGE value="ListUsers" />
-    <option name="LAST_COMMIT_MESSAGE" value="ListUsers" />
+    <MESSAGE value="IO Exception error" />
+    <option name="LAST_COMMIT_MESSAGE" value="IO Exception error" />
   </component>
 </project>

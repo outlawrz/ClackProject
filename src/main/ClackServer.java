@@ -1,6 +1,7 @@
 package main;
 
 import data.ClackData;
+import data.ListUsersClackData;
 
 import java.nio.channels.IllegalBlockingModeException;
 import java.util.*;
@@ -26,6 +27,7 @@ public class ClackServer {
     private int port; // An integer representing the port number on the server connected to
     private boolean closeConnection; // A boolean representing whether the connection is closed or not
     private ArrayList<ServerSideClientIO> serverSideClientIOList;
+    public ListUsersClackData LUClackData;
     /**
      * The constructor that sets the port number.
      * Should set dataToReceiveFromClient and dataToSendToClient as null.
@@ -33,14 +35,12 @@ public class ClackServer {
      * @param port an int representing the port number on the server connected to
      */
     public ClackServer(int port) {
-        try{
-            this.port = port;
-            this.closeConnection = false;
-            this.serverSideClientIOList = new ArrayList<ServerSideClientIO>();
-
-        } catch(IllegalArgumentException iae){
-            System.err.println("Port number is less than 1024");
+        if (port < 1024) {
+            throw new IllegalArgumentException("port must be greater than 1024");
         }
+        serverSideClientIOList = new ArrayList<ServerSideClientIO>();
+        LUClackData = new ListUsersClackData();
+        this.port = port;
 
     }
 
@@ -62,7 +62,7 @@ public class ClackServer {
         try {
             ServerSocket sskt = new ServerSocket(port);
             System.out.println(sskt);
-            while(!closeConnection) {
+            while(!closeConnection){
                 Socket cskt = sskt.accept();
                 ServerSideClientIO sscio = new ServerSideClientIO(this,cskt);
                 serverSideClientIOList.add(sscio);
@@ -74,7 +74,6 @@ public class ClackServer {
             System.err.println("Operation not allowed for security reasons");
         } catch(IllegalArgumentException iae){
             System.err.println("Port number not allowed");
-
         } catch(SocketTimeoutException ste){
             System.err.println("Socket took too long to connect");
         } catch(IllegalBlockingModeException ibme){
@@ -172,6 +171,7 @@ public class ClackServer {
     public static void main(String args[])
     {
         try {
+
             System.out.println("Type port or press enter to use default port: ");
             BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(System.in));
             String line = bufferedreader.readLine();

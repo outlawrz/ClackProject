@@ -1,6 +1,9 @@
 package main;
 
 import data.ClackData;
+import data.MessageClackData;
+import data.FileClackData;
+import data.ListUsersClackData;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,7 +12,7 @@ import java.net.*;
 
 public class ServerSideClientIO implements Runnable{
     private boolean closeConnection;
-    private data.ClackData dataToReceiveFromClient;
+    private data.ClackData dataToReceieveFromClient;
     private data.ClackData dataToSendToClient;
     private ObjectInputStream inFromClient;
     private ObjectOutputStream outToClient;
@@ -20,7 +23,7 @@ public class ServerSideClientIO implements Runnable{
         this.server=server;
         this.clientSocket=clientSocket;
         this.closeConnection=false;
-        this.dataToReceiveFromClient=null;
+        this.dataToReceieveFromClient=null;
         this.dataToSendToClient=null;
         this.inFromClient =null;
         this.outToClient =null;
@@ -33,6 +36,13 @@ public class ServerSideClientIO implements Runnable{
             inFromClient = new ObjectInputStream(clientSocket.getInputStream());
             while(!closeConnection){
                 receiveData();
+                if (dataToReceieveFromClient instanceof ListUsersClackData) {
+                    setDataToSendToClient(new MessageClackData("Server", this.server.LUClackData.getData(), ClackData.CONSTANT_LISTUSERS));
+                    System.out.println(this.server.LUClackData.getData());
+                } else {
+                    this.server.LUClackData.addUser(dataToReceieveFromClient.getUserName());
+                    this.server.broadcast(dataToReceieveFromClient);
+                }
                 this.server.broadcast(dataToSendToClient);
             }
         }catch(IOException ioe){
@@ -43,11 +53,11 @@ public class ServerSideClientIO implements Runnable{
 
     public void receiveData(){
         try {
-            dataToReceiveFromClient = (ClackData) inFromClient.readObject();
-            if (dataToReceiveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
+            dataToReceieveFromClient = (ClackData) inFromClient.readObject();
+            if (dataToReceieveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
                 this.server.remove(this);
             } else {
-                System.out.println(dataToReceiveFromClient);
+                System.out.println(dataToReceieveFromClient);
             }
         } catch (IOException ioe) {
             System.err.println("Error in reading or closing the stream");

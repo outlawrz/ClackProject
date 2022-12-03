@@ -3,6 +3,7 @@ package main;
 import data.ClackData;
 import data.FileClackData;
 import data.MessageClackData;
+import data.ListUsersClackData;
 
 import java.io.*;
 import java.net.*;
@@ -37,8 +38,8 @@ public class ClackClient {
     private ClackData dataToReceiveFromServer; // A ClackData object representing the data received from the server
     private Scanner inFromStd;
     private final static String CONSTANT_KEY= "RAMP";
-    private ObjectOutputStream outToServer;
-    private ObjectInputStream inFromServer;
+    private ObjectOutputStream outToServer=null;
+    private ObjectInputStream inFromServer=null;
 
     /**
      * The constructor to set up the username, host name, and port.
@@ -110,10 +111,10 @@ public class ClackClient {
 
 
             System.out.println("The error is after this");
-            this.inFromServer = new ObjectInputStream(skt.getInputStream());
-            this.outToServer = new ObjectOutputStream(skt.getOutputStream());
-            InputStreamReader inputStream = new InputStreamReader(System.in);
-            inFromStd = new Scanner(inputStream);
+            inFromServer = new ObjectInputStream(skt.getInputStream());
+            outToServer = new ObjectOutputStream(skt.getOutputStream());
+
+
 
 
             ClientSideServerListener listener = new ClientSideServerListener(this);
@@ -121,14 +122,12 @@ public class ClackClient {
             listenerThread.start();
 
             while(!closeConnection) {
-
-                readClientData();
-                sendData();
+                inFromStd = new Scanner(System.in);
+                this.readClientData();
+                this.sendData();
                 System.out.println("-");
             }
             inFromStd.close();
-            inFromServer.close();
-            outToServer.close();
             skt.close();
         } catch(UnknownHostException uhe) {
             System.err.println("Unknown host");
@@ -164,8 +163,7 @@ public class ClackClient {
             String filename = inFromStd.next();
             dataToSendToServer = new FileClackData(this.userName, filename, dataToSendToServer.CONSTANT_SENDFILE);
         } else if (input.equals("LISTUSERS")) {
-            ClackServer server = new ClackServer(this.port);
-            System.out.println(server.getServerSideClientIOList());
+            dataToSendToServer = new ListUsersClackData(userName, ClackData.CONSTANT_LISTUSERS);
         } else {
             input += inFromStd.nextLine();
             dataToSendToServer = new data.MessageClackData(this.userName, input, dataToSendToServer.CONSTANT_SENDMESSAGE);
