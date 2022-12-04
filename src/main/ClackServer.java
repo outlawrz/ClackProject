@@ -41,7 +41,6 @@ public class ClackServer {
         serverSideClientIOList = new ArrayList<ServerSideClientIO>();
         LUClackData = new ListUsersClackData();
         this.port = port;
-
     }
 
     /**
@@ -51,26 +50,25 @@ public class ClackServer {
      */
     public ClackServer() {
         this.port = DEFAULT_PORT;
+        serverSideClientIOList = new ArrayList<ServerSideClientIO>();
+        LUClackData = new ListUsersClackData();
+        this.port = port;
     }
 
-    /**
-     * Starts the server.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
-     */
     public void start() {
         try {
             ServerSocket sskt = new ServerSocket(port);
-            System.out.println(sskt);
-            while(!closeConnection){
+            //System.out.println(sskt);
+            while (!closeConnection) {
                 Socket cskt = sskt.accept();
-                ServerSideClientIO sscio = new ServerSideClientIO(this,cskt);
+                ServerSideClientIO sscio = new ServerSideClientIO(this, cskt);
                 serverSideClientIOList.add(sscio);
+                //System.out.println(serverSideClientIOList);
                 Thread runningServer = new Thread(sscio);
                 runningServer.start();
             }
             sskt.close();
-        } catch(SecurityException se){
+        } catch(SecurityException se) {
             System.err.println("Operation not allowed for security reasons");
         } catch(IllegalArgumentException iae){
             System.err.println("Port number not allowed");
@@ -94,15 +92,13 @@ public class ClackServer {
 
     /**
      * Sends data to client.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
      */
 
     public synchronized void broadcast(ClackData dataToBroadcastToClients)
     {
-        for(int i=0;i<serverSideClientIOList.size();i++){
+        for (int i = 0; i < serverSideClientIOList.size(); i++) {
             serverSideClientIOList.get(i).setDataToSendToClient(dataToBroadcastToClients);
-            serverSideClientIOList.get(i).sendData();
+            //serverSideClientIOList.get(i).sendData();
         }
     }
 

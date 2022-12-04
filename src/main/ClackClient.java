@@ -109,23 +109,20 @@ public class ClackClient {
             Socket skt = new Socket(this.hostName , this.port);
             System.out.println("Connected.\n-");
 
-
             inFromServer = new ObjectInputStream(skt.getInputStream());
             outToServer = new ObjectOutputStream(skt.getOutputStream());
-
-
-
 
             ClientSideServerListener listener = new ClientSideServerListener(this);
             Thread listenerThread = new Thread(listener);
             listenerThread.start();
+            inFromStd = new Scanner(System.in);
 
             while(!closeConnection) {
-                inFromStd = new Scanner(System.in);
-                this.readClientData();
-                this.sendData();
-                System.out.println("-");
+                    this.readClientData();
+                    this.sendData();
+                    System.out.println("-");
             }
+
             inFromStd.close();
             skt.close();
         } catch(UnknownHostException uhe) {
@@ -145,14 +142,8 @@ public class ClackClient {
         } catch(IOException ioe) {
             System.err.println("Error in closing or reading input or output stream");
         }
-
     }
 
-    /**
-     * Reads the data from the client.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
-     */
     public void readClientData() {
         String input = inFromStd.next();
         if (input.equals("LOGOUT") || input.equals("DONE")) {
@@ -169,29 +160,17 @@ public class ClackClient {
         }
     }
 
-    /**
-     * Sends data to server.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
-     */
     public void sendData() {
         try {
             outToServer.writeObject(dataToSendToServer);
-            //outToServer.close();
         } catch (IOException ioe) {
             System.err.println("Error in writing to stream or closing stream when sending to server");
         }
     }
 
-    /**
-     * Receives data from the server.
-     * Does not return anything.
-     * For now, it should have no code, just a declaration.
-     */
     public void receiveData() {
         try {
             dataToReceiveFromServer = (ClackData) inFromServer.readObject();
-            //inFromServer.close();
         } catch (IOException ioe) {
             System.err.println("Error in reading or closing the stream");
         } catch (ClassNotFoundException cnfe) {
@@ -203,12 +182,12 @@ public class ClackClient {
      * Prints the received data to the standard output.
      */
     public void printData() {
-        if (dataToReceiveFromServer.getType() == ClackData.CONSTANT_LOGOUT) {
-            System.out.println("Logging out.");
-        } else {
-            System.out.println("Username: " + dataToReceiveFromServer.getUserName() + ", Type: " + dataToReceiveFromServer.getType() + ", Date: " + dataToReceiveFromServer.getDate());
-            System.out.println(dataToReceiveFromServer.getData());
-        }
+            if (dataToReceiveFromServer.getType() == ClackData.CONSTANT_LOGOUT) {
+                System.out.println("Logging out.");
+            } else {
+                System.out.println("Username: " + dataToReceiveFromServer.getUserName() + ", Type: " + dataToReceiveFromServer.getType() + ", Date: " + dataToReceiveFromServer.getDate());
+                System.out.println(dataToReceiveFromServer.getData());
+            }
     }
 
     /**
