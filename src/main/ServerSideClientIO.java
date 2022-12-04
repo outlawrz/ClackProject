@@ -20,13 +20,13 @@ public class ServerSideClientIO implements Runnable{
     private Socket clientSocket;
 
     public ServerSideClientIO(ClackServer server, Socket clientSocket){
-        this.server=server;
-        this.clientSocket=clientSocket;
-        this.closeConnection=false;
-        this.dataToReceieveFromClient=null;
-        this.dataToSendToClient=null;
-        this.inFromClient =null;
-        this.outToClient =null;
+        this.server = server;
+        this.clientSocket = clientSocket;
+        this.closeConnection = false;
+        this.dataToReceieveFromClient = null;
+        this.dataToSendToClient = null;
+        this.inFromClient = null;
+        this.outToClient = null;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class ServerSideClientIO implements Runnable{
             inFromClient = new ObjectInputStream(clientSocket.getInputStream());
             while(!closeConnection){
                 this.receiveData();
+                this.server.LUClackData.addUser(dataToReceieveFromClient.getUserName());
                 if (dataToReceieveFromClient instanceof ListUsersClackData) {
                     setDataToSendToClient(new MessageClackData("Server", this.server.LUClackData.getData(), ClackData.CONSTANT_LISTUSERS));
                     System.out.println(this.server.LUClackData.getData());
                 } else {
-                    this.server.LUClackData.addUser(dataToReceieveFromClient.getUserName());
                     this.server.broadcast(dataToReceieveFromClient);
                 }
                 this.server.broadcast(dataToSendToClient);
@@ -56,7 +56,11 @@ public class ServerSideClientIO implements Runnable{
         try {
             dataToReceieveFromClient = (ClackData) inFromClient.readObject();
             if (dataToReceieveFromClient.getType() == ClackData.CONSTANT_LOGOUT) {
+                this.server.broadcast(dataToSendToClient);
+                closeConnection = true;
+                this.sendData();
                 server.remove(this);
+                System.out.println(dataToReceieveFromClient.getUserName() + " logging out");
             } else {
                 System.out.println(dataToReceieveFromClient);
             }
@@ -70,7 +74,6 @@ public class ServerSideClientIO implements Runnable{
     public void sendData(){
         try {
             outToClient.writeObject(dataToSendToClient);
-            //outToClient.close();
         } catch (IOException ioe) {
             System.err.println("Error in writing to stream or closing stream");
             closeConnection = true;
