@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e89d458f-a726-409b-b15c-2c3c7efc0ea7" name="Changes" comment="New commit">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/ClackClient_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/ClackClient_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e89d458f-a726-409b-b15c-2c3c7efc0ea7" name="Changes" comment="Massive Revamp to Network-Specific Methods&#10;Pretty Interface Updates&#10;.jar files updated&#10;&#10;It works!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/FileClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/FileClackData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/MessageClackData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/MessageClackData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/ClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ClackServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestClackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestClackClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestClackServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestClackServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +49,7 @@
       <recent name="C:\IntelliJ\ClackProject\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestClackServer">
+  <component name="RunManager" selected="Application.ClackClient">
     <configuration name="ClackClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.ClackClient" />
       <module name="ClackProject" />
@@ -116,8 +110,8 @@
       <list>
         <item itemvalue="Application.ClackClient" />
         <item itemvalue="Application.ClackServer" />
-        <item itemvalue="Application.TestClackClient" />
         <item itemvalue="Application.TestClackServer" />
+        <item itemvalue="Application.TestClackClient" />
         <item itemvalue="JAR Application.ClackClient.jar" />
       </list>
     </recent_temporary>
@@ -222,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668531384896</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Massive Revamp to Network-Specific Methods&#10;Pretty Interface Updates&#10;.jar files updated&#10;&#10;It works!">
+      <created>1668581486686</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668581486686</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,6 +244,7 @@
     <MESSAGE value="receive data" />
     <MESSAGE value="start methods" />
     <MESSAGE value="main methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="main methods" />
+    <MESSAGE value="Massive Revamp to Network-Specific Methods&#10;Pretty Interface Updates&#10;.jar files updated&#10;&#10;It works!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Massive Revamp to Network-Specific Methods&#10;Pretty Interface Updates&#10;.jar files updated&#10;&#10;It works!" />
   </component>
 </project>

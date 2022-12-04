@@ -299,8 +299,8 @@ public class ClackClient {
                 client.start();
             } else if(line.contains("@")&& line.contains(":")) {
                 String uname= line.substring(0,line.indexOf("@"));
-                String hname= line.substring(line.indexOf("@")+1,line.indexOf(":"));
-                int portnum= parseInt(line.substring(line.indexOf(":")));
+                String hname= line.substring(line.indexOf("@") + 1, line.indexOf(":"));
+                int portnum= parseInt(line.substring(line.indexOf(":") + 1));
                 ClackClient client = new ClackClient(uname, hname, portnum);
                 System.out.println("Using Username: " + uname + ", Hostname: " + hname + ", Port: " + portnum);
                 client.start();
